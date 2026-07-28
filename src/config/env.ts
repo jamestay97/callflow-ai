@@ -69,7 +69,15 @@ function resolvePublicBaseUrl(value: unknown): unknown {
 const envSchema = z
   .object({
     PORT: z.coerce.number().default(3001),
-    WEB_APP_URL: z.string().url().default("http://localhost:3000"),
+    WEB_APP_URL: z.preprocess(
+      (value) => {
+        if (typeof value !== "string" || value.trim() === "") {
+          return undefined;
+        }
+        return normalizePublicUrl(value);
+      },
+      z.string().url().default("http://localhost:3000"),
+    ),
     NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
 
     PUBLIC_BASE_URL: z.preprocess(

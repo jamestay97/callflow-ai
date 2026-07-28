@@ -1,7 +1,10 @@
 {
+  "/api-backend/[...path]/route": "app/api-backend/[...path]/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
   "/page": "app/page.js",
   "/dashboard/page": "app/dashboard/page.js",
   "/dashboard/[slug]/setup/page": "app/dashboard/[slug]/setup/page.js",
+  "/dashboard/[slug]/skills/page": "app/dashboard/[slug]/skills/page.js",
   "/dashboard/[slug]/page": "app/dashboard/[slug]/page.js",
   "/dashboard/[slug]/bookings/page": "app/dashboard/[slug]/bookings/page.js"
 }

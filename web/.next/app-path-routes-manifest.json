@@ -1,0 +1,10 @@
+{
+  "/api-backend/[...path]/route": "/api-backend/[...path]",
+  "/_not-found/page": "/_not-found",
+  "/page": "/",
+  "/dashboard/page": "/dashboard",
+  "/dashboard/[slug]/setup/page": "/dashboard/[slug]/setup",
+  "/dashboard/[slug]/skills/page": "/dashboard/[slug]/skills",
+  "/dashboard/[slug]/page": "/dashboard/[slug]",
+  "/dashboard/[slug]/bookings/page": "/dashboard/[slug]/bookings"
+}

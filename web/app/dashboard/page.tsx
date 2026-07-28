@@ -50,7 +50,9 @@ export default function DashboardPage() {
 
       {error && (
         <div className="mb-4 rounded-lg border border-red-200 bg-red-50 p-4 text-red-700">
-          {error}. Make sure the API is running (port 3001).
+          {error}. Check that the Railway API is up at{" "}
+          <code className="text-xs">/health</code> and{" "}
+          <code className="text-xs">API_URL</code> is set on Vercel.
         </div>
       )}
 

@@ -152,11 +152,13 @@ Remove any `/health` URL — use `/webhook/demo/voice` only.
 
 | Problem | Fix |
 |---------|-----|
-| Dashboard can't load clients | Set `API_URL` on Vercel; set `CORS_ORIGINS` on Railway |
+| **502 Bad Gateway** on `/health` | Open Railway **Deploy logs** — app likely crashed on startup. Do **not** set `PORT` manually; let Railway inject it. Redeploy after pulling latest code (fixes volume permissions). |
+| Dashboard shows "API failed to respond" | Railway API must be up first. On Vercel set `API_URL` to your Railway URL (no trailing slash), then **Redeploy**. |
+| Dashboard can't load clients | Set `API_URL` on Vercel; paste `ADMIN_API_KEY` in dashboard header |
 | Vapi 404 on tools | Server URL must end with `/webhook/demo/voice` |
 | Bookings disappear after redeploy | Add Railway volume at `/app/data` |
 | 401 on admin routes | Paste `ADMIN_API_KEY` in dashboard header |
-| Env validation fails on Railway | Set `NODE_ENV=production`, `PUBLIC_BASE_URL`, `ADMIN_API_KEY`, `VAPI_WEBHOOK_SECRET` |
+| Env validation fails on Railway | Set `NODE_ENV=production`, `PUBLIC_BASE_URL` (full `https://...`), `ADMIN_API_KEY`, `VAPI_WEBHOOK_SECRET`. `WEB_APP_URL` must include `https://`. |
 
 ---
 

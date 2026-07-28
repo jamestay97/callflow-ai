@@ -100,9 +100,11 @@ export function createApp(): Express {
 export function startServer(): Server {
   const app = createApp();
 
-  const server = app.listen(env.PORT, () => {
+  const host = "0.0.0.0";
+  const server = app.listen(env.PORT, host, () => {
     const apiUrl = env.PUBLIC_BASE_URL ?? `http://localhost:${env.PORT}`;
     logger.info("server started", {
+      host,
       port: env.PORT,
       environment: env.NODE_ENV,
       tenantCount: tenantCount(),

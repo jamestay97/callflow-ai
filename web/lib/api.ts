@@ -13,10 +13,16 @@ function adminHeaders(): HeadersInit {
 }
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(`${API_BASE}${path}`, {
-    ...init,
-    headers: { ...adminHeaders(), ...init?.headers },
-  });
+  let res: Response;
+  try {
+    res = await fetch(`${API_BASE}${path}`, {
+      ...init,
+      headers: { ...adminHeaders(), ...init?.headers },
+    });
+  } catch (err) {
+    const detail = err instanceof Error ? err.message : "network error";
+    throw new Error(`API failed to respond (${detail})`);
+  }
   if (!res.ok) {
     const err = await res.json().catch(() => ({ error: res.statusText }));
     throw new Error(err.error ?? "Request failed");
