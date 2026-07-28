@@ -62,7 +62,7 @@ function runFfmpeg(command: ffmpeg.FfmpegCommand): Promise<void> {
 /** Keep prompts short — long style locks confuse free image models. */
 export function buildSceneImagePrompt(scene: Scene): string {
   if (scene.visualPrompt?.trim()) {
-    return `${scene.visualPrompt.trim()}, chibi kids cartoon, bright colors, 3D animated style`;
+    return `${scene.visualPrompt.trim()}, 2D preschool educational cartoon, flat vector animation, clean outlines, soft cel shading, bright colors, no 3D, no text`;
   }
 
   const character = (scene.character ?? "buddy") as CharacterId;
@@ -72,12 +72,14 @@ export function buildSceneImagePrompt(scene: Scene): string {
     CHARACTER_VISUAL[character] ?? CHARACTER_VISUAL.buddy,
     MOOD_ACTION[mood] ?? MOOD_ACTION.story,
     MOOD_BG[mood] ?? MOOD_BG.story,
-    "chibi kids cartoon animation",
-    "bright saturated colors",
-    "3D animated preschool TV show style",
-    "cute big eyes",
-    "wholesome",
-    "no humans",
+    "2D preschool educational cartoon",
+    "flat vector animation",
+    "clean black outlines",
+    "soft cel shading",
+    "bright candy colors",
+    "children's TV show",
+    "no 3D",
+    "no CGI",
     "no text",
   ].join(", ");
 }
@@ -147,7 +149,10 @@ export async function tryGenerateAiVideoClip(
   outPath: string
 ): Promise<boolean> {
   const apiKey = config.pollinationsApiKey;
-  if (!apiKey) return false;
+  if (!apiKey) {
+    console.log("    AI video skipped (no POLLINATIONS_API_KEY)");
+    return false;
+  }
 
   const prompt = buildSceneImagePrompt(scene);
   const encoded = encodeURIComponent(prompt);
@@ -159,10 +164,17 @@ export async function tryGenerateAiVideoClip(
       `https://gen.pollinations.ai/video/${encoded}` +
       `?model=${model}&duration=${seconds}&aspectRatio=16:9&key=${encodeURIComponent(apiKey)}`;
     try {
+      console.log(`    Trying Pollinations video (${model}, ${seconds}s)...`);
       const res = await fetchWithTimeout(url, 180_000);
-      if (!res.ok) continue;
+      if (!res.ok) {
+        console.log(`    ${model} HTTP ${res.status}`);
+        continue;
+      }
       const buf = Buffer.from(await res.arrayBuffer());
-      if (buf.length < 20_000) continue;
+      if (buf.length < 20_000) {
+        console.log(`    ${model} returned tiny payload (${buf.length} bytes)`);
+        continue;
+      }
 
       const rawPath = outPath.replace(/\.mp4$/, "-raw.mp4");
       await writeFile(rawPath, buf);
@@ -179,12 +191,15 @@ export async function tryGenerateAiVideoClip(
           ])
           .save(outPath)
       );
+      console.log(`    AI video OK (${model}, ${(buf.length / 1024).toFixed(0)} KB)`);
       return true;
-    } catch {
+    } catch (err) {
+      console.log(`    ${model} failed: ${err instanceof Error ? err.message : err}`);
       continue;
     }
   }
 
+  console.log("    AI video unavailable — using illustrated keyframes");
   return false;
 }
 

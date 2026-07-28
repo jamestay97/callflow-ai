@@ -64,7 +64,7 @@ function colorForIndex(i: number): string {
 }
 
 function animalVisual(subject: string, action: string, background: string): string {
-  return `cute ${subject.toLowerCase()} cartoon character ${action}, ${background}, chibi kids cartoon, bright colors`;
+  return `cute ${subject.toLowerCase()} cartoon character ${action}, ${background}, 2D preschool educational cartoon, flat vector animation, clean outlines, soft cel shading, bright colors, children's TV show`;
 }
 
 function buildSharingOrKindness(
@@ -139,7 +139,7 @@ function buildColorVideo(color: string): VideoScript {
         backgroundColor: colorForIndex(0),
         character: "star",
         mood: "intro",
-        visualPrompt: `cute glowing star character waving, lots of ${color.toLowerCase()} toys and balloons, bright kids cartoon`,
+        visualPrompt: `cute glowing star character waving, lots of ${color.toLowerCase()} toys and balloons, 2D preschool cartoon flat vector`,
       },
       {
         text: template.lesson(color),
@@ -148,7 +148,7 @@ function buildColorVideo(color: string): VideoScript {
         character: "star",
         mood: "lesson",
         music: "none",
-        visualPrompt: `cute star character pointing at ${color.toLowerCase()} objects, colorful classroom, kids cartoon`,
+        visualPrompt: `cute star character pointing at ${color.toLowerCase()} objects, colorful classroom, 2D preschool cartoon flat vector`,
       },
       {
         text: template.example(color),
@@ -156,7 +156,7 @@ function buildColorVideo(color: string): VideoScript {
         backgroundColor: colorForIndex(2),
         character: "duck",
         mood: "story",
-        visualPrompt: `cute yellow duckling with ${color.toLowerCase()} balloons and flowers, bright playground, kids cartoon`,
+        visualPrompt: `cute yellow duckling with ${color.toLowerCase()} balloons and flowers, bright playground, 2D preschool cartoon flat vector`,
       },
       {
         text: template.recap(color),
@@ -164,7 +164,7 @@ function buildColorVideo(color: string): VideoScript {
         backgroundColor: colorForIndex(3),
         character: "bunny",
         mood: "celebrate",
-        visualPrompt: `cute bunny celebrating with ${color.toLowerCase()} confetti, party meadow, bright kids cartoon`,
+        visualPrompt: `cute bunny celebrating with ${color.toLowerCase()} confetti, party meadow, 2D preschool cartoon flat vector`,
       },
       {
         text: "See you next time, color explorers!",
@@ -172,7 +172,7 @@ function buildColorVideo(color: string): VideoScript {
         backgroundColor: colorForIndex(4),
         character: "buddy",
         mood: "outro",
-        visualPrompt: `friendly blue cartoon mascot waving goodbye, ${color.toLowerCase()} sunset sky, kids cartoon`,
+        visualPrompt: `friendly blue cartoon mascot waving goodbye, ${color.toLowerCase()} sunset sky, 2D preschool cartoon flat vector`,
       },
     ],
   };
@@ -191,7 +191,7 @@ function buildCountingVideo(n: number): VideoScript {
         backgroundColor: colorForIndex(0),
         character: "duck",
         mood: "intro",
-        visualPrompt: `cute yellow duckling waving near big number ${n}, bright playground, kids cartoon`,
+        visualPrompt: `cute yellow duckling waving near big number ${n}, bright playground, 2D preschool cartoon flat vector`,
       },
       {
         text: template.lesson(n),
@@ -200,7 +200,7 @@ function buildCountingVideo(n: number): VideoScript {
         character: "duck",
         mood: "lesson",
         music: "none",
-        visualPrompt: `cute duckling teaching counting with colorful blocks, kids classroom, bright cartoon`,
+        visualPrompt: `cute duckling teaching counting with colorful blocks, kids classroom, 2D preschool cartoon flat vector`,
       },
       {
         text: template.example(n),
@@ -208,7 +208,7 @@ function buildCountingVideo(n: number): VideoScript {
         backgroundColor: colorForIndex(2),
         character: "duck",
         mood: "story",
-        visualPrompt: `cute duckling counting ${n} colorful apples and stars, candy forest, kids cartoon`,
+        visualPrompt: `cute duckling counting ${n} colorful apples and stars, candy forest, 2D preschool cartoon flat vector`,
       },
       {
         text: template.recap(n),
@@ -216,7 +216,7 @@ function buildCountingVideo(n: number): VideoScript {
         backgroundColor: colorForIndex(3),
         character: "duck",
         mood: "celebrate",
-        visualPrompt: `cute duckling celebrating counting to ${n} with confetti, party meadow, kids cartoon`,
+        visualPrompt: `cute duckling celebrating counting to ${n} with confetti, party meadow, 2D preschool cartoon flat vector`,
       },
       {
         text: "Keep counting every day — you're doing amazing!",
@@ -224,7 +224,7 @@ function buildCountingVideo(n: number): VideoScript {
         backgroundColor: colorForIndex(4),
         character: "duck",
         mood: "outro",
-        visualPrompt: `cute duckling waving goodbye under starry sunset, bright kids cartoon`,
+        visualPrompt: `cute duckling waving goodbye under starry sunset, 2D preschool cartoon flat vector`,
       },
     ],
   };

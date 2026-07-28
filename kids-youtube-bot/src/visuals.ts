@@ -6,6 +6,7 @@ import { renderAllAiClips } from "./aiVisuals.js";
 import { renderAll3dClips } from "./render3d.js";
 import { renderAllTalkingClips } from "./talkingVisuals.js";
 import { renderAllShowClips } from "./showVisuals.js";
+import { renderAllCartoon2dClips } from "./cartoon2d.js";
 
 export async function renderSceneClips(
   scenes: Scene[],
@@ -17,8 +18,19 @@ export async function renderSceneClips(
 
   const engine = config.visualEngine;
 
-  // Full cartoon show: entirely animated 3D worlds + lip sync (professional look)
-  if (engine === "show" || engine === "auto") {
+  // Default: Super Simple / preschool 2D cartoon show style
+  if (engine === "cartoon2d" || engine === "auto") {
+    try {
+      console.log("Using 2D preschool cartoon show style (Super Simple–inspired)...");
+      return await renderAllCartoon2dClips(scenes, durations, workDir);
+    } catch (err) {
+      console.warn(
+        `2D cartoon failed (${err instanceof Error ? err.message : err}) — trying AI stills.`
+      );
+    }
+  }
+
+  if (engine === "show") {
     try {
       console.log("Using full cartoon-show animation (3D world + lip sync)...");
       return await renderAllShowClips(scenes, sceneAudio, workDir);
@@ -40,7 +52,13 @@ export async function renderSceneClips(
     }
   }
 
-  if (engine === "ai" || engine === "talking" || engine === "auto" || engine === "show") {
+  if (
+    engine === "ai" ||
+    engine === "talking" ||
+    engine === "auto" ||
+    engine === "show" ||
+    engine === "cartoon2d"
+  ) {
     try {
       console.log("Using free AI kids-series visuals (Pollinations)...");
       return await renderAllAiClips(scenes, durations, workDir);

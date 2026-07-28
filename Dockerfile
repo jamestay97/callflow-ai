@@ -13,8 +13,6 @@ RUN npm run build
 FROM node:22-alpine AS runner
 WORKDIR /app
 
-ENV NODE_ENV=production
-
 RUN addgroup -S app && adduser -S app -G app \
   && mkdir -p /app/data && chown -R app:app /app/data
 

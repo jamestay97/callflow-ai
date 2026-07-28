@@ -55,7 +55,7 @@ export async function createDailyVideo(force = false): Promise<PipelineResult> {
 
   const durations = sceneAudio.map((s) => s.durationSeconds);
 
-  await logInfo("Rendering cartoon show scenes...");
+  await logInfo("Rendering 2D preschool cartoon scenes...");
   const clipPaths = await renderSceneClips(
     script.scenes,
     durations,

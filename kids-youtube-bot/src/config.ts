@@ -28,8 +28,14 @@ function buildConfig() {
     dashboardPort: Number(env("DASHBOARD_PORT", "3847")),
     /** Pollinations API key for free-tier AI video (optional). Get at https://enter.pollinations.ai */
     pollinationsApiKey: env("POLLINATIONS_API_KEY"),
-    /** visual engine: show (full cartoon) | talking | ai | threed | auto */
-    visualEngine: (env("VISUAL_ENGINE", "show") as "show" | "talking" | "ai" | "threed" | "auto"),
+    /** visual engine: cartoon2d (preschool 2D show) | show | talking | ai | threed | auto */
+    visualEngine: (env("VISUAL_ENGINE", "cartoon2d") as
+      | "cartoon2d"
+      | "show"
+      | "talking"
+      | "ai"
+      | "threed"
+      | "auto"),
   };
 }
 
